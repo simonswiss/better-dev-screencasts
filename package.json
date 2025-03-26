@@ -22,6 +22,7 @@
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "astro": "^5.5.4",
+    "astro-analytics": "^2.7.0",
     "astro-embed": "^0.9.0",
     "astro-seo": "^0.8.4",
     "date-fns": "^4.1.0",
