@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content'
+import { getEntry } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+import PostLayout from '../../layouts/PostLayout.astro'
+import { render } from 'astro:content'
+import { Image } from 'astro:assets'
+import Tweet from '../../components/Tweet.astro'
+import { pathHasLocale } from 'astro:i18n'
+
+const { slug } = Astro.params
+if (!slug) {
+  return {
+    status: 404,
+    error: new Error('Not found'),
+  }
+}
+
+const post = await getEntry('posts', slug)
+if (!post) {
+  return {
+    status: 404,
+    error: new Error('Not found'),
+  }
+}
+
+const { Content } = await render(post)
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts')
+  return posts.map((post) => ({ params: { slug: post.id } }))
+}
+---
+
+<PostLayout post={post} />

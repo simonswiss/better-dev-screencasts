@@ -1,0 +1,26 @@
+---
+import ImageComponent from 'astro/components/Image.astro'
+
+type Props = {
+  image: string
+  width?: number
+  height?: number
+  altText: string
+  caption?: string
+  classes?: string
+}
+
+const { image, width, height, altText, caption, classes } = Astro.props as Props
+---
+
+<figure>
+  <ImageComponent
+    src={image}
+    width={width || 640}
+    height={height || 480}
+    alt={altText}
+    class={classes || 'max-h-[800px] w-auto rounded-lg shadow-lg'}
+  />
+
+  {caption && <figcaption class="!mt-3" set:html={caption} />}
+</figure>

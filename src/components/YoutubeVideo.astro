@@ -1,0 +1,15 @@
+---
+import { YouTube } from 'astro-embed'
+
+type Props = {
+  id: string
+}
+
+const { id } = Astro.props as Props
+---
+
+<YouTube
+  class="my-8 w-full !max-w-none aspect-video overflow-hidden rounded-2xl shadow-2xl relative"
+  id={id}
+  posterQuality="max"
+/>

@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/typography';
+@plugin '@tailwindcss/forms';
+
+@theme {
+  --default-font-family: 'Poppins', sans-serif;
+  --max-width-8xl: 96rem;
+}

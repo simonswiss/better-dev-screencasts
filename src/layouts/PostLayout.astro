@@ -1,0 +1,81 @@
+---
+import { format } from 'date-fns'
+import { Image } from 'astro:assets'
+import { type CollectionEntry, render } from 'astro:content'
+
+import Layout from './Layout.astro'
+
+import Tweet from '../components/Tweet.astro'
+import Iframe from '../components/Iframe.astro'
+import ImageComponent from '../components/Image.astro'
+import YoutubeVideo from '../components/YoutubeVideo.astro'
+import Split from '../components/Split.astro'
+import KitForm from '../components/KitForm.astro'
+
+type Props = {
+  post: CollectionEntry<'posts'>
+}
+
+const { post } = Astro.props as Props
+const { Content } = await render(post)
+---
+
+<Layout title={post.data.title} description={post.data.excerpt} ogImage={post.data.coverImage}>
+  <div class="px-4 pt-8 mx-auto max-w-7xl sm:px-6 md:pt-20 lg:px-8 2xl:max-w-8xl">
+    <div
+      class="mx-auto prose break-words prose-slate prose-blockquote:border-indigo-500 prose-blockquote:text-indigo-900 prose-figure:mt-0 prose-figcaption:mt-0 lg:prose-lg lg:prose-figure:mt-0 lg:prose-figcaption:mt-0 xl:prose-xl xl:prose-figure:mt-2 xl:prose-figcaption:mt-0 2xl:prose-figcaption:mt-0"
+    >
+      <h1>{post.data.title}</h1>
+      <p class="text-base text-slate-500">
+        Posted on {format(new Date(post.data.date), 'd MMMM yyy')}
+      </p>
+      <div class="mt-8 text-xl text-slate-600 xl:text-3xl">{post.data.excerpt}</div>
+      <div class="mt-12">
+        <div class="h-0.5 w-16 bg-indigo-500"></div>
+        <div class="mt-8">
+          {/* The actual body content */}
+          <Content
+            components={{
+              Image: ImageComponent,
+              Tweet,
+              Iframe,
+              YoutubeVideo,
+              Split,
+            }}
+          />
+        </div>
+      </div>
+      {/* Author footer */}
+      <footer class="p-8 mt-20 bg-white rounded-lg shadow not-prose lg:mt-32">
+        <div class="flex items-center gap-4 text-sm md:text-base">
+          <div class="shrink-0">
+            <Image
+              src="/images/twitter-avatar.png"
+              class="object-cover rounded-full"
+              width={80}
+              height={80}
+              alt="avatar for simonswiss"
+            />
+          </div>
+          <div>
+            <p class="font-medium">
+              posted by <span>simonswiss</span>
+            </p>
+            <p class="text-slate-500">Front-end developer, video editor, content creator.</p>
+          </div>
+        </div>
+        <div class="mt-8 space-y-4">
+          <p>Hey, I'm Simon 👋</p>
+          <p>
+            <a href="/" class="text-indigo-500 underline hover:text-indigo-700">
+              Better Dev Screencasts
+            </a> is a personal project of mine. If you enjoyed this post, please consider sharing it
+            with your friends! ❤️
+          </p>
+          <p>And if you want more video editing tips, subscribe via the form below!</p>
+        </div>
+        <KitForm />
+      </footer>
+    </div>
+  </div>
+</Layout>

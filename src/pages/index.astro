@@ -1,11 +1,72 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/Layout.astro'
+import PageHeading from '../components/PageHeading.astro'
+import { getCollection } from 'astro:content'
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import seoImage from '/public/images/social-large.jpg'
+import { Image } from 'astro:assets'
+import CallToAction from '../components/CallToAction.astro'
+
+const meta = {
+  title: 'Helping developers create better screencasts',
+  description: `A collection of resources to help developers create better screencasts, and level-up their overall video content creation game.`,
+  image: seoImage,
+}
+
+const posts = await getCollection('posts')
+const sortedPosts = posts.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+)
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={meta.title} description={meta.description} ogImage={meta.image.src}>
+  <PageHeading title={meta.title}>{meta.description}</PageHeading>
+
+  {
+    sortedPosts.length === 0 ? (
+      <div class="px-4 mx-auto mt-12 max-w-7xl sm:px-6 md:mt-16 lg:mt-24 lg:px-8 2xl:max-w-8xl">
+        <footer class="inline-block max-w-xl p-8 rounded-lg shadow-sm bg-indigo-50">
+          <div class="space-y-4">
+            <p class="text-indigo-900">
+              There are no posts in this category... yet. Check back soon!
+            </p>
+          </div>
+        </footer>
+      </div>
+    ) : (
+      <div class="grid px-4 mx-auto mt-12 max-w-7xl gap-x-8 gap-y-12 sm:px-6 md:mt-16 lg:mt-24 lg:grid-cols-2 lg:gap-y-16 lg:px-8 2xl:max-w-8xl 2xl:grid-cols-3">
+        {sortedPosts.map((post) => {
+          const imageSrc = post.data.coverImage ?? seoImage.src
+          return (
+            <div class="relative">
+              <a href={`/posts/${post.id}`} class="hover:opacity-80">
+                <Image
+                  class="aspect-[4/3] rounded-md object-cover shadow-lg"
+                  src={imageSrc}
+                  alt=""
+                  width={800}
+                  height={450}
+                />
+              </a>
+
+              <h2 class="mt-4 text-lg font-semibold">
+                <a href={`/posts/${post.id}`} class="hover:underline">
+                  {post.data.title}
+                </a>
+              </h2>
+              <p class="mt-2 text-slate-700">{post.data.excerpt}</p>
+              <a
+                href={`/posts/${post.id}`}
+                class="block mt-4 font-medium text-indigo-500 hover:underline"
+              >
+                Read more &rarr;
+              </a>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
+  <CallToAction />
 </Layout>

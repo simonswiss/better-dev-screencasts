@@ -1,0 +1,9 @@
+---
+type Props = {
+  code: string
+}
+
+const { code } = Astro.props as Props
+---
+
+<div set:html={code} />

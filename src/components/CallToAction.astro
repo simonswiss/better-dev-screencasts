@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets'
+import KitForm from './KitForm.astro'
+---
+
+<div class="max-w-4xl px-4 pt-8 mx-auto mt-24 sm:px-6 lg:px-8">
+  <div class="p-8 bg-white rounded-lg shadow">
+    <div class="flex items-center gap-4 text-sm md:text-base">
+      <div class="shrink-0">
+        <Image
+          src="/images/twitter-avatar.png"
+          class="object-cover rounded-full"
+          width={80}
+          height={80}
+          alt="avatar for simonswiss"
+        />
+      </div>
+      <div>
+        <p class="font-medium">
+          Created by <span>simonswiss</span>
+        </p>
+        <p class="text-slate-500">Front-end developer, video editor, content creator.</p>
+      </div>
+    </div>
+    <div class="mt-8 space-y-4">
+      <p>Hey, friend! Thank you so much for visiting ❤️</p>
+
+      <p>If you want to be updated when a new post is out, sign up below!</p>
+    </div>
+
+    <KitForm />
+  </div>
+</div>
