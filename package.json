@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.1",
+    "@astrojs/partytown": "^2.1.4",
     "@astrojs/react": "^4.2.1",
     "@astrojs/sitemap": "^3.3.0",
     "@astrojs/vercel": "^8.1.3",

@@ -10,9 +10,11 @@ import sitemap from '@astrojs/sitemap'
 
 import vercel from '@astrojs/vercel';
 
+import partytown from '@astrojs/partytown';
+
 export default defineConfig({
   site: 'https://betterdevscreencasts.com',
-  integrations: [react(), mdx(), keystatic(), sitemap()],
+  integrations: [react(), mdx(), keystatic(), sitemap(), partytown()],
 
   vite: {
     plugins: [tailwindcss()],
