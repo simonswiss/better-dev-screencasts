@@ -45,7 +45,12 @@ export default config({
                   directory: 'src/images/posts',
                   publicPath: '/src/images/posts',
                 }),
-                altText: fields.text({ label: 'Alt text' }),
+                altText: fields.text({
+                  label: 'Alt text',
+                  validation: {
+                    isRequired: true,
+                  },
+                }),
                 classes: fields.text({ label: 'classnames' }),
                 caption: fields.text({ label: 'Caption' }),
               },
