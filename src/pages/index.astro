@@ -19,7 +19,7 @@ const sortedPosts = posts.sort(
 )
 ---
 
-<Layout title={meta.title} description={meta.description} ogImage={meta.image.src}>
+<Layout title={meta.title} description={meta.description} ogImage={meta.image}>
   <PageHeading title={meta.title}>{meta.description}</PageHeading>
 
   {
@@ -36,18 +36,18 @@ const sortedPosts = posts.sort(
     ) : (
       <div class="grid px-4 mx-auto mt-12 max-w-7xl gap-x-8 gap-y-12 sm:px-6 md:mt-16 lg:mt-24 lg:grid-cols-2 lg:gap-y-16 lg:px-8 2xl:max-w-8xl 2xl:grid-cols-3">
         {sortedPosts.map((post) => {
-          const imageSrc = post.data.coverImage ?? seoImage.src
+          const imageSrc = post.data.coverImage ?? seoImage
           return (
             <div class="relative">
-              <a href={`/posts/${post.id}`} class="hover:opacity-80">
-                <Image
-                  class="aspect-[4/3] rounded-md object-cover shadow-lg"
-                  src={imageSrc}
-                  alt=""
-                  width={800}
-                  height={450}
-                />
-              </a>
+              {post.data.coverImage && (
+                <a href={`/posts/${post.id}`} class="hover:opacity-80">
+                  <Image
+                    class="aspect-[4/3] rounded-md object-cover shadow-lg"
+                    src={imageSrc}
+                    alt=""
+                  />
+                </a>
+              )}
 
               <h2 class="mt-4 text-lg font-semibold">
                 <a href={`/posts/${post.id}`} class="hover:underline">
