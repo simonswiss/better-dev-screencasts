@@ -8,10 +8,15 @@ import keystatic from '@keystatic/astro'
 
 import sitemap from '@astrojs/sitemap'
 
+import vercel from '@astrojs/vercel';
+
 export default defineConfig({
   site: 'https://betterdevscreencasts.com',
   integrations: [react(), mdx(), keystatic(), sitemap()],
+
   vite: {
     plugins: [tailwindcss()],
   },
+
+  adapter: vercel(),
 })
