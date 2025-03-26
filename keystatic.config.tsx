@@ -1,11 +1,20 @@
-import { collection, config, fields } from '@keystatic/core'
+import { collection, config, fields, type GitHubConfig, type LocalConfig } from '@keystatic/core'
 import { Video } from 'lucide-react'
 import { block, wrapper } from '@keystatic/core/content-components'
 
+const storage: GitHubConfig['storage'] | LocalConfig['storage'] =
+  process.env.NODE_ENV === 'development'
+    ? { kind: 'local' }
+    : {
+        kind: 'github',
+        repo: {
+          owner: 'simonswiss',
+          name: 'better-dev-screencasts',
+        },
+      }
+
 export default config({
-  storage: {
-    kind: 'local',
-  },
+  storage,
   ui: {
     brand: {
       name: 'Better Dev Screencasts',
