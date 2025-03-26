@@ -27,6 +27,8 @@ if (!images[image]) {
     src={images[image]()}
     alt={altText}
     class={classes || 'max-h-[800px] w-auto rounded-lg shadow-lg'}
+    width={820}
+    densities={[1.5, 2]}
   />
 
   {caption && <figcaption class="!mt-3" set:html={caption} />}
