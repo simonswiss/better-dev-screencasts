@@ -26,11 +26,14 @@ export default config({
         excerpt: fields.text({ label: 'Excerpt' }),
         coverImage: fields.image({
           label: 'Cover image',
-          directory: 'public/images/posts',
-          publicPath: '/',
+          directory: 'src/images/posts',
+          publicPath: '@images/posts',
         }),
         body: fields.mdx({
           label: 'Body',
+          options: {
+            image: false,
+          },
           components: {
             Split: wrapper({ label: 'Split', schema: {} }),
             Image: block({
@@ -39,11 +42,9 @@ export default config({
                 image: fields.image({
                   label: 'Image',
                   validation: { isRequired: true },
-                  directory: 'public/images/posts',
-                  publicPath: '/images/posts',
+                  directory: 'src/images/posts',
+                  publicPath: '/src/images/posts',
                 }),
-                width: fields.integer({ label: 'Width', defaultValue: 640 }),
-                height: fields.integer({ label: 'Height', defaultValue: 480 }),
                 altText: fields.text({ label: 'Alt text' }),
                 classes: fields.text({ label: 'classnames' }),
                 caption: fields.text({ label: 'Caption' }),
@@ -53,6 +54,12 @@ export default config({
               label: 'Youtube Video',
               schema: {
                 id: fields.text({ label: 'Video ID' }),
+              },
+            }),
+            Tweet: block({
+              label: 'Tweet',
+              schema: {
+                id: fields.text({ label: 'Tweet ID' }),
               },
             }),
           },

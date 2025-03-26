@@ -4,18 +4,20 @@ import '../styles/main.css'
 import Navigation from '../components/Navigation.astro'
 import Footer from '../components/Footer.astro'
 import { SEO } from 'astro-seo'
+import type { ImageMetadata } from 'astro'
+import defaultOgImage from '../images/social-large.jpg'
 
 type Props = {
   title?: string
   description?: string
-  ogImage?: string
+  ogImage?: ImageMetadata
 }
 
 const defaultMeta = {
   title: 'Better Dev Screencasts',
   description:
     'A collection of resources to help developers create better screencasts, and level-up their overall video content creation game.',
-  ogImage: Astro.site + 'social-card-large.jpg',
+  ogImage: defaultOgImage,
 }
 
 const {
@@ -48,14 +50,14 @@ const trimmedTitle = getMetaTitle(title)
       description={description}
       twitter={{
         site: '@simonswiss',
-        image: ogImage,
+        image: ogImage.src,
         creator: '@simonswiss',
       }}
       openGraph={{
         basic: {
           title: trimmedTitle,
           type: 'website',
-          image: ogImage,
+          image: ogImage.src,
           url: Astro.site,
         },
       }}
