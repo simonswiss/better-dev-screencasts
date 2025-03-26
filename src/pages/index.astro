@@ -34,15 +34,18 @@ const sortedPosts = posts.sort(
         </footer>
       </div>
     ) : (
-      <div class="grid px-4 mx-auto mt-12 max-w-7xl gap-x-8 gap-y-12 sm:px-6 md:mt-16 lg:mt-24 lg:grid-cols-2 lg:gap-y-16 lg:px-8 2xl:max-w-8xl 2xl:grid-cols-3">
+      <div class="grid px-4 mx-auto mt-12 max-w-7xl gap-x-12 gap-y-16 sm:px-6 md:mt-16 lg:mt-24 lg:grid-cols-2 lg:gap-y-16 lg:px-8 2xl:max-w-8xl 2xl:grid-cols-3">
         {sortedPosts.map((post) => {
           const imageSrc = post.data.coverImage ?? seoImage
           return (
             <div class="relative">
               {post.data.coverImage && (
-                <a href={`/posts/${post.id}`} class="hover:opacity-80">
+                <a
+                  href={`/posts/${post.id}`}
+                  class="block group relative aspect-[16/10] rounded-md shadow ring ring-black/5 overflow-clip"
+                >
                   <Image
-                    class="aspect-[4/3] rounded-md object-cover shadow-lg"
+                    class="object-cover absolute inset-0 h-full w-full group-hover:-rotate-1 group-hover:scale-[1.03] transition duration-300 group-hover:contrast-125"
                     src={imageSrc}
                     alt=""
                   />
