@@ -8,13 +8,23 @@ import keystatic from '@keystatic/astro'
 
 import sitemap from '@astrojs/sitemap'
 
-import vercel from '@astrojs/vercel';
+import vercel from '@astrojs/vercel'
 
-import partytown from '@astrojs/partytown';
+import partytown from '@astrojs/partytown'
 
 export default defineConfig({
   site: 'https://betterdevscreencasts.com',
-  integrations: [react(), mdx(), keystatic(), sitemap(), partytown()],
+  integrations: [
+    react(),
+    mdx(),
+    keystatic(),
+    sitemap(),
+    partytown({
+      config: {
+        forward: ['dataLayer.push'],
+      },
+    }),
+  ],
 
   vite: {
     plugins: [tailwindcss()],
